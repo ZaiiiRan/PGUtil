@@ -23,15 +23,14 @@ namespace PGUtil
             if (hostTextBox.Text == "") hostTextBox.Text = "localhost";
             if (portTextBox.Text == "") portTextBox.Text = "5432";
             if (userTextBox.Text == "") userTextBox.Text = "postgres";
-            if (dbTextBox.Text == "") dbTextBox.Text = "photo_workshop";
             if (passTextBox.Text == "")
             {
-                MessageBox.Show("Поле с паролем должно быть заполнено! ");
+                MessageBox.Show("Поле с паролем должно быть заполнено!");
                 return;
             }
             try
             {
-                PG.OpenConnection(hostTextBox.Text, portTextBox.Text, userTextBox.Text, passTextBox.Text, dbTextBox.Text);
+                PG.OpenConnection(hostTextBox.Text, portTextBox.Text, userTextBox.Text, passTextBox.Text);
             }
             catch (Exception ex)
             {

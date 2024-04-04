@@ -19,12 +19,12 @@ namespace PGUtil
             timer1.Start();
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void exitMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void backMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
             Program.MainForm.Activate();
@@ -32,43 +32,58 @@ namespace PGUtil
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (PG.CheckConnection()) connectionStatusLabel.Text = "подключено";
-            else connectionStatusLabel.Text = "не подключено";
+            if (PG.CheckConnection())
+            {
+                connectionStatusLabel.ForeColor = Color.Green;
+                connectionStatusLabel.Text = "подключено";
+            }
+            else
+            {
+                connectionStatusLabel.ForeColor = Color.Red;
+                connectionStatusLabel.Text = "не подключено";
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void workersMenuItem_Click(object sender, EventArgs e)
         {
-            if (!PG.CheckConnection())
-            {
-                MessageBox.Show("Отображение данных невозможно, так как отсутствует подключение к БД!");
-                return;
-            }
+            WorkersForm form = new WorkersForm();
+            form.Show();
+        }
 
-            List<List<string>> list = PG.GetTable("works");
+        private void worksMenuItem_Click(object sender, EventArgs e)
+        {
+            WorksForm form = new WorksForm();
+            form.Show();
+        }
 
-            dataGridView1.Rows.Clear();
-            dataGridView1.Columns.Clear();
-            foreach(string str in list[0]) 
-            {
-                dataGridView1.Columns.Add(str, str);
-            }
-            bool skip = false;
-            foreach(List<string> l in list)
-            {
-                if (skip)
-                {
-                    string[] v = new string[l.Count];
-                    int k = 0;
-                    foreach (string str in l)
-                    {
-                        v[k] = str;
-                        k++;
-                    }
-                    dataGridView1.Rows.Add(v);
-                }
-                skip = true;
-            }
+        private void specializationsMenuItem_Click(object sender, EventArgs e)
+        {
+            SpecializationsForm form = new SpecializationsForm();
+            form.Show();
+        }
 
+        private void worksForSpecializationsMenuItem_Click(object sender, EventArgs e)
+        {
+            WorksForSpecializationsForm form = new WorksForSpecializationsForm();
+            form.Show();
+        }
+
+        private void specializationsForWorkersMenuItem_Click(object sender, EventArgs e)
+        {
+            SpecializationsForWorkersForm form = new SpecializationsForWorkersForm();
+            form.Show();
+        }
+
+        private void orderStatusesMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderStatusesForm form = new OrderStatusesForm();
+            form.Show();
+        }
+
+        private void paymentTypesMenuItem_Click(object sender, EventArgs e)
+        {
+            PaymentTypesForm form = new PaymentTypesForm();
+            form.Show();
         }
     }
 }
