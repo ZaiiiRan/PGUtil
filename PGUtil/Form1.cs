@@ -74,5 +74,11 @@ namespace PGUtil
             DataTables form = new DataTables();
             form.Show();
         }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            ReportsViews form = new ReportsViews();
+            form.Show();
+        }
     }
 }

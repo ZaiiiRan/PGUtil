@@ -113,6 +113,18 @@
     <Compile Include="DataTables.Designer.cs">
       <DependentUpon>DataTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrderReceiptsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderReceiptsForm.Designer.cs">
+      <DependentUpon>OrderReceiptsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderReportsForm.Designer.cs">
+      <DependentUpon>OrderReportsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrdersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +143,12 @@
     <Compile Include="PaymentTypesForm.Designer.cs">
       <DependentUpon>PaymentTypesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PeriodReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PeriodReportForm.Designer.cs">
+      <DependentUpon>PeriodReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PG.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -145,6 +163,12 @@
     </Compile>
     <Compile Include="RefTables.Designer.cs">
       <DependentUpon>RefTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsViews.Designer.cs">
+      <DependentUpon>ReportsViews.cs</DependentUpon>
     </Compile>
     <Compile Include="SpecializationsForm.cs">
       <SubType>Form</SubType>
@@ -188,6 +212,12 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrderReceiptsForm.resx">
+      <DependentUpon>OrderReceiptsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderReportsForm.resx">
+      <DependentUpon>OrderReportsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OrdersForm.resx">
       <DependentUpon>OrdersForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PaymentTypesForm.resx">
       <DependentUpon>PaymentTypesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PeriodReportForm.resx">
+      <DependentUpon>PeriodReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -209,6 +242,9 @@
     </Compile>
     <EmbeddedResource Include="RefTables.resx">
       <DependentUpon>RefTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsViews.resx">
+      <DependentUpon>ReportsViews.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SpecializationsForm.resx">
       <DependentUpon>SpecializationsForm.cs</DependentUpon>
