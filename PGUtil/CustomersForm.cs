@@ -58,7 +58,7 @@ namespace PGUtil
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetFullTable("works");
+                List<List<string>> data = PG.GetFullTable("customers");
                 PG.FillTableInDataGridView(data, dataGridView1);
             }
         }
