@@ -34,14 +34,17 @@
             this.viewAllMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.getDataButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.periodTextBox1 = new System.Windows.Forms.TextBox();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.innTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.periodTextBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -85,14 +88,14 @@
             this.exitMenuItem.Text = "Выйти";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
-            // button1
+            // getDataButton
             // 
-            this.button1.Location = new System.Drawing.Point(410, 77);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 23);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Сформировать отчет";
-            this.button1.UseVisualStyleBackColor = true;
+            this.getDataButton.Location = new System.Drawing.Point(484, 78);
+            this.getDataButton.Name = "getDataButton";
+            this.getDataButton.Size = new System.Drawing.Size(183, 23);
+            this.getDataButton.TabIndex = 42;
+            this.getDataButton.Text = "Сформировать отчет";
+            this.getDataButton.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -100,16 +103,16 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(12, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 20);
+            this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 41;
-            this.label1.Text = "Номер заказа:";
+            this.label1.Text = "Период:";
             // 
-            // textBox1
+            // periodTextBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(190, 58);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 22);
-            this.textBox1.TabIndex = 40;
+            this.periodTextBox1.Location = new System.Drawing.Point(138, 59);
+            this.periodTextBox1.Name = "periodTextBox1";
+            this.periodTextBox1.Size = new System.Drawing.Size(127, 22);
+            this.periodTextBox1.TabIndex = 40;
             // 
             // connectionStatusLabel
             // 
@@ -154,24 +157,54 @@
             this.label2.TabIndex = 44;
             this.label2.Text = "ИНН исполнителя: ";
             // 
-            // textBox2
+            // innTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(190, 100);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(188, 22);
-            this.textBox2.TabIndex = 43;
+            this.innTextBox.Location = new System.Drawing.Point(190, 100);
+            this.innTextBox.Name = "innTextBox";
+            this.innTextBox.Size = new System.Drawing.Size(264, 22);
+            this.innTextBox.TabIndex = 43;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(103, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 20);
+            this.label3.TabIndex = 45;
+            this.label3.Text = "от";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(290, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 20);
+            this.label4.TabIndex = 47;
+            this.label4.Text = "до";
+            // 
+            // periodTextBox2
+            // 
+            this.periodTextBox2.Location = new System.Drawing.Point(327, 59);
+            this.periodTextBox2.Name = "periodTextBox2";
+            this.periodTextBox2.Size = new System.Drawing.Size(127, 22);
+            this.periodTextBox2.TabIndex = 46;
             // 
             // PeriodReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 459);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.periodTextBox2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.innTextBox);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.getDataButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.periodTextBox1);
             this.Controls.Add(this.connectionStatusLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dataGridView1);
@@ -193,13 +226,16 @@
         private System.Windows.Forms.ToolStripMenuItem viewAllMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button getDataButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox periodTextBox1;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox innTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox periodTextBox2;
     }
 }
