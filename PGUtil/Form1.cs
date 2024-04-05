@@ -68,5 +68,11 @@ namespace PGUtil
             RefTables form = new RefTables();
             form.Show();
         }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            DataTables form = new DataTables();
+            form.Show();
+        }
     }
 }
