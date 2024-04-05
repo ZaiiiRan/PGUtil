@@ -46,7 +46,7 @@ namespace PGUtil
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetTable("order_receipt");
+                List<List<string>> data = PG.GetFullTable("order_receipt");
                 PG.FillTableInDataGridView(data, dataGridView1);
             }
         }
@@ -59,8 +59,34 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetTable("order_receipt");
+            List<List<string>> data = PG.GetFullTable("order_receipt");
             PG.FillTableInDataGridView(data, dataGridView1);
+        }
+
+        private void getDataButton_Click(object sender, EventArgs e)
+        {
+            if (!PG.CheckConnection())
+            {
+                MessageBox.Show("Отображение данных невозможно, так как отсутствует подключение к БД!");
+                return;
+            }
+
+            if (orderIdTextBox.Text == "")
+            {
+                MessageBox.Show("Для генерации отчета необходимо указать номер заказа!");
+                return;
+            }
+
+            try
+            {
+                List<List<string>> data = PG.GetTableWithCondition("order_receipt", $"номер_заказа = {orderIdTextBox.Text}");
+                PG.FillTableInDataGridView(data, dataGridView1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка! " + ex.Message);
+            }
+            
         }
     }
 }

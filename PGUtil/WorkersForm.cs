@@ -38,7 +38,7 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetTable("workers");
+            List<List<string>> data = PG.GetFullTable("workers");
             PG.FillTableInDataGridView(data, dataGridView1);
         }
 
@@ -46,7 +46,7 @@ namespace PGUtil
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetTable("workers");
+                List<List<string>> data = PG.GetFullTable("workers");
                 PG.FillTableInDataGridView(data, dataGridView1);
             }
         }

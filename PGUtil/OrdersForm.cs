@@ -51,14 +51,14 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetTable("orders");
+            List<List<string>> data = PG.GetFullTable("orders");
             PG.FillTableInDataGridView(data, dataGridView1);
         }
         private void Form_Shown(object sender, EventArgs e)
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetTable("orders");
+                List<List<string>> data = PG.GetFullTable("orders");
                 PG.FillTableInDataGridView(data, dataGridView1);
             }
         }

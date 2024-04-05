@@ -27,7 +27,7 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetTable("payment_types");
+            List<List<string>> data = PG.GetFullTable("payment_types");
             PG.FillTableInDataGridView(data, dataGridView1);
         }
 
@@ -35,7 +35,7 @@ namespace PGUtil
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetTable("payment_types");
+                List<List<string>> data = PG.GetFullTable("payment_types");
                 PG.FillTableInDataGridView(data, dataGridView1);
             }
         }

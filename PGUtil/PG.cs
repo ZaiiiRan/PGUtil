@@ -33,10 +33,22 @@ namespace PGUtil
             return connection != null && connection.State == ConnectionState.Open;
         }
 
-        public static List<List<string>> GetTable(string tableName)
+        public static List<List<string>> GetFullTable(string tableName)
+        {
+            string query = "SELECT * FROM " + tableName + ";";
+            return SendQuery(query);
+        }
+
+        public static List<List<string>> GetTableWithCondition(string tableName, string condition)
+        {
+            string query = "SELECT * FROM " + tableName + " WHERE " + condition + ";";
+            return SendQuery(query);
+        }
+
+        public static List<List<string>> SendQuery(string sql)
         {
             NpgsqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * from public." + tableName + ";";
+            command.CommandText = sql;
             NpgsqlDataReader dt = command.ExecuteReader(CommandBehavior.Default);
             bool addNames = false;
             List<List<string>> table = new List<List<string>>();
