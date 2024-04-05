@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A8211496-2F16-48E6-9B73-303954B418BD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>КАиСД_Lab_2_8</RootNamespace>
-    <AssemblyName>КАиСД Lab 2_8</AssemblyName>
+    <RootNamespace>PGUtil</RootNamespace>
+    <AssemblyName>PGUtil</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -101,6 +101,54 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersForm.Designer.cs">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataTables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataTables.Designer.cs">
+      <DependentUpon>DataTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderReceiptsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderReceiptsForm.Designer.cs">
+      <DependentUpon>OrderReceiptsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderReportsForm.Designer.cs">
+      <DependentUpon>OrderReportsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdersForm.Designer.cs">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderStatusesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderStatusesForm.Designer.cs">
+      <DependentUpon>OrderStatusesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTypesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentTypesForm.Designer.cs">
+      <DependentUpon>PaymentTypesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PeriodReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PeriodReportForm.Designer.cs">
+      <DependentUpon>PeriodReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PG.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -116,11 +164,71 @@
     <Compile Include="RefTables.Designer.cs">
       <DependentUpon>RefTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportsViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsViews.Designer.cs">
+      <DependentUpon>ReportsViews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecializationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpecializationsForm.Designer.cs">
+      <DependentUpon>SpecializationsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecializationsForWorkersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpecializationsForWorkersForm.Designer.cs">
+      <DependentUpon>SpecializationsForWorkersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkersForm.Designer.cs">
+      <DependentUpon>WorkersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorksForm.Designer.cs">
+      <DependentUpon>WorksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorksForSpecializationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorksForSpecializationsForm.Designer.cs">
+      <DependentUpon>WorksForSpecializationsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomersForm.resx">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataTables.resx">
+      <DependentUpon>DataTables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderReceiptsForm.resx">
+      <DependentUpon>OrderReceiptsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderReportsForm.resx">
+      <DependentUpon>OrderReportsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrdersForm.resx">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderStatusesForm.resx">
+      <DependentUpon>OrderStatusesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentTypesForm.resx">
+      <DependentUpon>PaymentTypesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PeriodReportForm.resx">
+      <DependentUpon>PeriodReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -130,9 +238,28 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RefTables.resx">
       <DependentUpon>RefTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsViews.resx">
+      <DependentUpon>ReportsViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecializationsForm.resx">
+      <DependentUpon>SpecializationsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecializationsForWorkersForm.resx">
+      <DependentUpon>SpecializationsForWorkersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkersForm.resx">
+      <DependentUpon>WorkersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorksForm.resx">
+      <DependentUpon>WorksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorksForSpecializationsForm.resx">
+      <DependentUpon>WorksForSpecializationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
