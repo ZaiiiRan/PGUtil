@@ -17,12 +17,7 @@ namespace PGUtil
             InitializeComponent();
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void backMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
             Program.MainForm.Activate();

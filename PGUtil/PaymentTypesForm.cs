@@ -45,11 +45,6 @@ namespace PGUtil
             this.Close();
         }
 
-        private void exitMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (PG.CheckConnection())

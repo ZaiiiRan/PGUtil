@@ -33,7 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.updateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -51,8 +50,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.updateMenuItem,
-            this.backMenuItem,
-            this.exitMenuItem});
+            this.backMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 28);
@@ -72,13 +70,6 @@
             this.backMenuItem.Size = new System.Drawing.Size(65, 24);
             this.backMenuItem.Text = "Назад";
             this.backMenuItem.Click += new System.EventHandler(this.backMenuItem_Click);
-            // 
-            // exitMenuItem
-            // 
-            this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(67, 24);
-            this.exitMenuItem.Text = "Выйти";
-            this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // connectionStatusLabel
             // 
@@ -139,7 +130,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem updateMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView1;

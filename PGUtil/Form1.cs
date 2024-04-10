@@ -52,33 +52,33 @@ namespace PGUtil
             }
         }
 
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-            AboutForm form = new AboutForm();
-            form.Show();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void refTablesMenuItem_Click(object sender, EventArgs e)
         {
             RefTables form = new RefTables();
             form.Show();
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void dataTablesMenuItem_Click(object sender, EventArgs e)
         {
             DataTables form = new DataTables();
             form.Show();
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void reportsMenuItem_Click(object sender, EventArgs e)
         {
             ReportsViews form = new ReportsViews();
             form.Show();
+        }
+
+        private void infoMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm form = new AboutForm();
+            form.Show();
+        }
+
+        private void exitMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

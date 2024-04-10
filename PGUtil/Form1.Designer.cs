@@ -40,11 +40,11 @@
             this.passTextBox = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.refTablesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataTablesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -148,11 +148,11 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem5});
+            this.refTablesMenuItem,
+            this.dataTablesMenuItem,
+            this.reportsMenuItem,
+            this.infoMenuItem,
+            this.exitMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -160,40 +160,40 @@
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // toolStripMenuItem1
+            // refTablesMenuItem
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(117, 24);
-            this.toolStripMenuItem1.Text = "Справочники";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.refTablesMenuItem.Name = "refTablesMenuItem";
+            this.refTablesMenuItem.Size = new System.Drawing.Size(117, 24);
+            this.refTablesMenuItem.Text = "Справочники";
+            this.refTablesMenuItem.Click += new System.EventHandler(this.refTablesMenuItem_Click);
             // 
-            // toolStripMenuItem2
+            // dataTablesMenuItem
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(78, 24);
-            this.toolStripMenuItem2.Text = "Данные";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.dataTablesMenuItem.Name = "dataTablesMenuItem";
+            this.dataTablesMenuItem.Size = new System.Drawing.Size(78, 24);
+            this.dataTablesMenuItem.Text = "Данные";
+            this.dataTablesMenuItem.Click += new System.EventHandler(this.dataTablesMenuItem_Click);
             // 
-            // toolStripMenuItem3
+            // reportsMenuItem
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(73, 24);
-            this.toolStripMenuItem3.Text = "Отчеты";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.reportsMenuItem.Name = "reportsMenuItem";
+            this.reportsMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.reportsMenuItem.Text = "Отчеты";
+            this.reportsMenuItem.Click += new System.EventHandler(this.reportsMenuItem_Click);
             // 
-            // toolStripMenuItem4
+            // infoMenuItem
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(118, 24);
-            this.toolStripMenuItem4.Text = "О программе";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.infoMenuItem.Name = "infoMenuItem";
+            this.infoMenuItem.Size = new System.Drawing.Size(118, 24);
+            this.infoMenuItem.Text = "О программе";
+            this.infoMenuItem.Click += new System.EventHandler(this.infoMenuItem_Click);
             // 
-            // toolStripMenuItem5
+            // exitMenuItem
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(67, 24);
-            this.toolStripMenuItem5.Text = "Выход";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(67, 24);
+            this.exitMenuItem.Text = "Выход";
+            this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // connectionStatusLabel
             // 
@@ -259,11 +259,11 @@
         private System.Windows.Forms.TextBox passTextBox;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem refTablesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dataTablesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Label label6;
     }

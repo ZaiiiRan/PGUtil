@@ -20,11 +20,6 @@ namespace PGUtil
             timer1.Start();
         }
 
-        private void exitMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void backMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();

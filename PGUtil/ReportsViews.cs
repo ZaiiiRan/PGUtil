@@ -38,11 +38,6 @@ namespace PGUtil
             Program.MainForm.Activate();
         }
 
-        private void ExitMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void periodMenuItem_Click(object sender, EventArgs e)
         {
             PeriodReportForm form = new PeriodReportForm();

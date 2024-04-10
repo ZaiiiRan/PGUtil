@@ -36,7 +36,6 @@
             this.orderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderReceiptMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BackMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -93,13 +92,6 @@
             this.BackMenuItem.Text = "Назад";
             this.BackMenuItem.Click += new System.EventHandler(this.BackMenuItem_Click);
             // 
-            // ExitMenuItem
-            // 
-            this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(67, 24);
-            this.ExitMenuItem.Text = "Выход";
-            this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -107,12 +99,11 @@
             this.periodMenuItem,
             this.orderMenuItem,
             this.orderReceiptMenuItem,
-            this.BackMenuItem,
-            this.ExitMenuItem});
+            this.BackMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(784, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(705, 28);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,7 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 141);
+            this.ClientSize = new System.Drawing.Size(705, 141);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.connectionStatusLabel);
             this.Controls.Add(this.label6);
@@ -142,7 +133,6 @@
         private System.Windows.Forms.ToolStripMenuItem orderMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderReceiptMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BackMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

@@ -38,11 +38,6 @@ namespace PGUtil
             Program.MainForm.Activate();
         }
 
-        private void ExitMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void customersMenuItem_Click(object sender, EventArgs e)
         {
             CustomersForm form = new CustomersForm();

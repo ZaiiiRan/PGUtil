@@ -33,7 +33,6 @@
             this.customersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BackMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -46,8 +45,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.customersMenuItem,
             this.ordersMenuItem,
-            this.BackMenuItem,
-            this.ExitMenuItem});
+            this.BackMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -75,13 +73,6 @@
             this.BackMenuItem.Size = new System.Drawing.Size(65, 24);
             this.BackMenuItem.Text = "Назад";
             this.BackMenuItem.Click += new System.EventHandler(this.BackMenuItem_Click);
-            // 
-            // ExitMenuItem
-            // 
-            this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(67, 24);
-            this.ExitMenuItem.Text = "Выход";
-            this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
             // connectionStatusLabel
             // 
@@ -129,7 +120,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem BackMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timer1;
