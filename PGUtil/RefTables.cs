@@ -41,43 +41,43 @@ namespace PGUtil
 
         private void workersMenuItem_Click(object sender, EventArgs e)
         {
-            WorkersForm form = new WorkersForm();
+            TableForm form = new TableForm("workers", "Работники");
             form.Show();
         }
 
         private void worksMenuItem_Click(object sender, EventArgs e)
         {
-            WorksForm form = new WorksForm();
+            TableForm form = new TableForm("works", "Работы");
             form.Show();
         }
 
         private void specializationsMenuItem_Click(object sender, EventArgs e)
         {
-            SpecializationsForm form = new SpecializationsForm();
+            TableForm form = new TableForm("specializations", "Специализации");
             form.Show();
         }
 
         private void worksForSpecializationsMenuItem_Click(object sender, EventArgs e)
         {
-            WorksForSpecializationsForm form = new WorksForSpecializationsForm();
+            TableForm form = new TableForm("works_for_specializations", "Специализации и их работы");
             form.Show();
         }
 
         private void specializationsForWorkersMenuItem_Click(object sender, EventArgs e)
         {
-            SpecializationsForWorkersForm form = new SpecializationsForWorkersForm();
+            TableForm form = new TableForm("specializations_for_workers", "Работники и их специализации");
             form.Show();
         }
 
         private void orderStatusesMenuItem_Click(object sender, EventArgs e)
         {
-            OrderStatusesForm form = new OrderStatusesForm();
+            TableForm form = new TableForm("order_statuses", "Статусы заказов");
             form.Show();
         }
 
         private void paymentTypesMenuItem_Click(object sender, EventArgs e)
         {
-            PaymentTypesForm form = new PaymentTypesForm();
+            TableForm form = new TableForm("payment_types", "Типы оплаты");
             form.Show();
         }
     }

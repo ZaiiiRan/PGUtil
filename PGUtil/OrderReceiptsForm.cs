@@ -37,12 +37,17 @@ namespace PGUtil
                 connectionStatusLabel.Text = "не подключено";
             }
         }
+
+        private void GetAndFillData()
+        {
+            List<List<string>> data = PG.GetFullTable("order_receipt");
+            PG.FillTableInDataGridView(data, dataGridView1);
+        }
         private void Form_Shown(object sender, EventArgs e)
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetFullTable("order_receipt");
-                PG.FillTableInDataGridView(data, dataGridView1);
+                GetAndFillData();
             }
         }
 
@@ -54,8 +59,7 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetFullTable("order_receipt");
-            PG.FillTableInDataGridView(data, dataGridView1);
+            GetAndFillData();
         }
 
         private void getDataButton_Click(object sender, EventArgs e)

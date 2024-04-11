@@ -10,14 +10,25 @@ using System.Windows.Forms;
 
 namespace PGUtil
 {
-    public partial class SpecializationsForWorkersForm : Form
+    public partial class TableForm : Form
     {
-        public SpecializationsForWorkersForm()
+        private string tableName;
+        public TableForm(string tableName, string formName)
         {
             InitializeComponent();
+            this.Text = formName;
+            this.tableName = tableName;
             this.Shown += Form_Shown;
             timer1.Start();
+
         }
+
+        private void GetAndFillData()
+        {
+            List<List<string>> data = PG.GetFullTable(tableName);
+            PG.FillTableInDataGridView(data, dataGridView1);
+        }
+
         private void updateMenuItem_Click(object sender, EventArgs e)
         {
             if (!PG.CheckConnection())
@@ -26,17 +37,12 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetFullTable("specializations_for_workers");
-            PG.FillTableInDataGridView(data, dataGridView1);
+            GetAndFillData();
         }
 
-        private void Form_Shown(object sender, EventArgs e)
+        private void backMenuItem_Click(object sender, EventArgs e)
         {
-            if (PG.CheckConnection())
-            {
-                List<List<string>> data = PG.GetFullTable("specializations_for_workers");
-                PG.FillTableInDataGridView(data, dataGridView1);
-            }
+            this.Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -52,10 +58,12 @@ namespace PGUtil
                 connectionStatusLabel.Text = "не подключено";
             }
         }
-
-        private void backMenuItem_Click(object sender, EventArgs e)
+        private void Form_Shown(object sender, EventArgs e)
         {
-            this.Close();
+            if (PG.CheckConnection())
+            {
+                GetAndFillData();
+            }
         }
     }
 }

@@ -101,12 +101,6 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomersForm.Designer.cs">
-      <DependentUpon>CustomersForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataTables.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,24 +118,6 @@
     </Compile>
     <Compile Include="OrderReportsForm.Designer.cs">
       <DependentUpon>OrderReportsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OrdersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OrdersForm.Designer.cs">
-      <DependentUpon>OrdersForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OrderStatusesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OrderStatusesForm.Designer.cs">
-      <DependentUpon>OrderStatusesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PaymentTypesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PaymentTypesForm.Designer.cs">
-      <DependentUpon>PaymentTypesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PeriodReportForm.cs">
       <SubType>Form</SubType>
@@ -170,41 +146,14 @@
     <Compile Include="ReportsViews.Designer.cs">
       <DependentUpon>ReportsViews.cs</DependentUpon>
     </Compile>
-    <Compile Include="SpecializationsForm.cs">
+    <Compile Include="TableForm.cs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SpecializationsForm.Designer.cs">
-      <DependentUpon>SpecializationsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SpecializationsForWorkersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SpecializationsForWorkersForm.Designer.cs">
-      <DependentUpon>SpecializationsForWorkersForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WorkersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WorkersForm.Designer.cs">
-      <DependentUpon>WorkersForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WorksForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WorksForm.Designer.cs">
-      <DependentUpon>WorksForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WorksForSpecializationsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WorksForSpecializationsForm.Designer.cs">
-      <DependentUpon>WorksForSpecializationsForm.cs</DependentUpon>
+    <Compile Include="TableForm.cs.Designer.cs">
+      <DependentUpon>TableForm.cs.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomersForm.resx">
-      <DependentUpon>CustomersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataTables.resx">
       <DependentUpon>DataTables.cs</DependentUpon>
@@ -217,15 +166,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderReportsForm.resx">
       <DependentUpon>OrderReportsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OrdersForm.resx">
-      <DependentUpon>OrdersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OrderStatusesForm.resx">
-      <DependentUpon>OrderStatusesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PaymentTypesForm.resx">
-      <DependentUpon>PaymentTypesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PeriodReportForm.resx">
       <DependentUpon>PeriodReportForm.cs</DependentUpon>
@@ -246,20 +186,8 @@
     <EmbeddedResource Include="ReportsViews.resx">
       <DependentUpon>ReportsViews.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SpecializationsForm.resx">
-      <DependentUpon>SpecializationsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SpecializationsForWorkersForm.resx">
-      <DependentUpon>SpecializationsForWorkersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WorkersForm.resx">
-      <DependentUpon>WorkersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WorksForm.resx">
-      <DependentUpon>WorksForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WorksForSpecializationsForm.resx">
-      <DependentUpon>WorksForSpecializationsForm.cs</DependentUpon>
+    <EmbeddedResource Include="TableForm.cs.resx">
+      <DependentUpon>TableForm.cs.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

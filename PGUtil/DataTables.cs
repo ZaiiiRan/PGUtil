@@ -40,13 +40,13 @@ namespace PGUtil
 
         private void customersMenuItem_Click(object sender, EventArgs e)
         {
-            CustomersForm form = new CustomersForm();
+            TableForm form = new TableForm("customers", "Заказчики");
             form.Show();
         }
 
         private void ordersMenuItem_Click(object sender, EventArgs e)
         {
-            OrdersForm form = new OrdersForm();
+            TableForm form = new TableForm("orders", "Заказы");
             form.Show();
         }
     }

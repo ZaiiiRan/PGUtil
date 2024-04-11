@@ -39,6 +39,12 @@ namespace PGUtil
             this.Close();
         }
 
+        private void GetAndFillData()
+        {
+            List<List<string>> data = PG.GetFullTable("period_reports");
+            PG.FillTableInDataGridView(data, dataGridView1);
+        }
+
         private void viewAllMenuItem_Click(object sender, EventArgs e)
         {
             if (!PG.CheckConnection())
@@ -47,15 +53,13 @@ namespace PGUtil
                 return;
             }
 
-            List<List<string>> data = PG.GetFullTable("period_reports");
-            PG.FillTableInDataGridView(data, dataGridView1);
+            GetAndFillData();
         }
         private void Form_Shown(object sender, EventArgs e)
         {
             if (PG.CheckConnection())
             {
-                List<List<string>> data = PG.GetFullTable("period_reports");
-                PG.FillTableInDataGridView(data, dataGridView1);
+                GetAndFillData();
             }
         }
 
