@@ -33,6 +33,13 @@ namespace PGUtil
             return connection != null && connection.State == ConnectionState.Open;
         }
 
+        public static void Delete(string tableName, string id, string idColumnName)
+        {
+            NpgsqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"DELETE FROM {tableName} WHERE {idColumnName} = {id}";
+            cmd.ExecuteNonQuery();
+        }
+
         public static List<List<string>> GetFullTable(string tableName)
         {
             string query = "SELECT * FROM " + tableName + ";";

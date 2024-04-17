@@ -41,43 +41,43 @@ namespace PGUtil
 
         private void workersMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("workers", "Работники");
+            CRUD form = new CRUD("workers", false, "id");
             form.Show();
         }
 
         private void worksMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("works", "Работы");
+            CRUD form = new CRUD("works", false, "id");
             form.Show();
         }
 
         private void specializationsMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("specializations", "Специализации");
+            CRUD form = new CRUD("specializations", false, "id");
             form.Show();
         }
 
         private void worksForSpecializationsMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("works_for_specializations", "Специализации и их работы");
+            CRUD form = new CRUD("works_for_specializations", false, "work_id");
             form.Show();
         }
 
         private void specializationsForWorkersMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("specializations_for_workers", "Работники и их специализации");
+            CRUD form = new CRUD("specializations_for_workers", false, "inn");
             form.Show();
         }
 
         private void orderStatusesMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("order_statuses", "Статусы заказов");
+            CRUD form = new CRUD("order_statuses", false, "id");
             form.Show();
         }
 
         private void paymentTypesMenuItem_Click(object sender, EventArgs e)
         {
-            TableForm form = new TableForm("payment_types", "Типы оплаты");
+            CRUD form = new CRUD("payment_types", false, "id");
             form.Show();
         }
     }
