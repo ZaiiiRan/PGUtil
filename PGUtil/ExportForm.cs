@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -137,10 +136,10 @@ namespace PGUtil
             try
             {
                 Excel.Application excelApp = new Excel.Application();
-                excelApp.Visible = false;
+                excelApp.Visible = false; //отключаем автоматическое открытие приложения
                 Excel.Workbook workbook = excelApp.Workbooks.Add();
                 Excel.Worksheet worksheet = workbook.ActiveSheet;
-                ((dynamic)worksheet.Cells).NumberFormat = "@";
+                ((dynamic)worksheet.Cells).NumberFormat = "@"; //отключаем стандартное форматирование чисел
                 int row = 1;
                 foreach (List<string> list in data)
                 {
@@ -153,9 +152,9 @@ namespace PGUtil
                     row++;
                 }
                 Excel.Range rng = (Excel.Range)worksheet.Rows[1];
-                rng.Font.Bold = true;
+                rng.Font.Bold = true; //делаем первую строку жирной
                 rng = worksheet.UsedRange;
-                rng.Columns.AutoFit();
+                rng.Columns.AutoFit(); //автоширина столбцов
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     workbook.SaveAs(saveFileDialog.FileName);
@@ -169,6 +168,7 @@ namespace PGUtil
                 MessageBox.Show("Произошла ошибка при сохранении файла!");
             }
         }
+
         private void ExportToHTML(List<List<string>> data, string name)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();

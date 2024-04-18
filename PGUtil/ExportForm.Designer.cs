@@ -288,9 +288,10 @@
             this.Controls.Add(this.connectionStatusLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ExportForm";
-            this.Text = "ExportForm";
+            this.Text = "Экспорт представлений";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
