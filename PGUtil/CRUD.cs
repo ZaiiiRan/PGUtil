@@ -226,7 +226,7 @@ namespace PGUtil
         }
         private void generateReportButton_Click(object sender, EventArgs e)
         {
-            GenerateReportsForm form = new GenerateReportsForm(tableName);
+            GenerateReportsForm form = new GenerateReportsForm(tableName, $"Ввод данных для генерации отчета {tableName}");
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 condition = form.condition;

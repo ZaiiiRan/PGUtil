@@ -25,9 +25,10 @@ namespace PGUtil
         private TextBox periodTextBox1;
         private TextBox periodTextBox2;
         private TextBox orderIdTextBox;
-        public GenerateReportsForm(string viewName)
+        public GenerateReportsForm(string viewName, string name)
         {
             InitializeComponent();
+            this.Text = name;
             this.viewName = viewName;
             if (viewName == "order_reports" || viewName == "order_receipt") 
             {

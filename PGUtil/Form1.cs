@@ -80,5 +80,11 @@ namespace PGUtil
         {
             Application.Exit();
         }
+
+        private void exportMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportForm form = new ExportForm();
+            form.Show();
+        }
     }
 }

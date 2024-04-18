@@ -47,6 +47,7 @@
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.exportMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // 
             this.connectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.connectButton.Location = new System.Drawing.Point(37, 218);
-            this.connectButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.connectButton.Margin = new System.Windows.Forms.Padding(2);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(146, 28);
             this.connectButton.TabIndex = 5;
@@ -66,7 +67,7 @@
             // 
             this.hostTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.hostTextBox.Location = new System.Drawing.Point(67, 64);
-            this.hostTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hostTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.hostTextBox.Name = "hostTextBox";
             this.hostTextBox.Size = new System.Drawing.Size(139, 23);
             this.hostTextBox.TabIndex = 1;
@@ -97,7 +98,7 @@
             // 
             this.portTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.portTextBox.Location = new System.Drawing.Point(67, 99);
-            this.portTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.portTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(139, 23);
             this.portTextBox.TabIndex = 2;
@@ -117,7 +118,7 @@
             // 
             this.userTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.userTextBox.Location = new System.Drawing.Point(67, 138);
-            this.userTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.userTextBox.Name = "userTextBox";
             this.userTextBox.Size = new System.Drawing.Size(139, 23);
             this.userTextBox.TabIndex = 3;
@@ -137,7 +138,7 @@
             // 
             this.passTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.passTextBox.Location = new System.Drawing.Point(67, 176);
-            this.passTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.passTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.passTextBox.Name = "passTextBox";
             this.passTextBox.PasswordChar = '*';
             this.passTextBox.Size = new System.Drawing.Size(139, 23);
@@ -155,6 +156,7 @@
             this.refTablesMenuItem,
             this.dataTablesMenuItem,
             this.reportsMenuItem,
+            this.exportMenuItem,
             this.infoMenuItem,
             this.exitMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -220,6 +222,13 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Статус подключения к БД:";
             // 
+            // exportMenuItem
+            // 
+            this.exportMenuItem.Name = "exportMenuItem";
+            this.exportMenuItem.Size = new System.Drawing.Size(150, 20);
+            this.exportMenuItem.Text = "Экспорт представлений";
+            this.exportMenuItem.Click += new System.EventHandler(this.exportMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,7 +248,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -272,6 +281,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripMenuItem exportMenuItem;
     }
 }
 
