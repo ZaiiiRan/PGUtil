@@ -51,12 +51,6 @@ namespace PGUtil
             cmd.ExecuteNonQuery();
         }
 
-        public static List<List<string>> GetFullTable(string tableName)
-        {
-            string query = "SELECT * FROM " + tableName + ";";
-            return SendQuery(query);
-        }
-
         public static List<List<string>> GetTableWithCondition(string tableName, string condition)
         {
             string query = "SELECT * FROM " + tableName + " WHERE " + condition + ";";

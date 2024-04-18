@@ -125,24 +125,6 @@
     <Compile Include="InputDataForm.Designer.cs">
       <DependentUpon>InputDataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrderReceiptsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OrderReceiptsForm.Designer.cs">
-      <DependentUpon>OrderReceiptsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OrderReportsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OrderReportsForm.Designer.cs">
-      <DependentUpon>OrderReportsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PeriodReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PeriodReportForm.Designer.cs">
-      <DependentUpon>PeriodReportForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="PG.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -181,15 +163,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InputDataForm.resx">
       <DependentUpon>InputDataForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OrderReceiptsForm.resx">
-      <DependentUpon>OrderReceiptsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OrderReportsForm.resx">
-      <DependentUpon>OrderReportsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PeriodReportForm.resx">
-      <DependentUpon>PeriodReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

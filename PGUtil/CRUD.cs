@@ -106,6 +106,9 @@ namespace PGUtil
             {
                 MessageBox.Show(ex.Message);
             }
+            totalRecords = PG.GetTotalRecordsCount(tableName);
+            totalPages = (int)Math.Ceiling((double)totalRecords / recordsPerPage);
+            if (currentPage > totalPages) currentPage = totalPages;
             LoadData();
         }
 
