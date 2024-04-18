@@ -12,51 +12,260 @@ namespace PGUtil
 {
     public partial class InputDataForm : Form
     {
-        public InputDataForm(string tableName)
+        private bool addMode;
+        private string tableName;
+        private string selectedId;
+        private Dictionary<string, string> specializations;
+        private Dictionary<string, string> workers;
+        private Dictionary<string, string> works;
+        private Dictionary<string, string> customers;
+        private Dictionary<string, string> paymentTypes;
+        private Dictionary<string, string> orderStatuses;
+        public InputDataForm(string tableName, bool addMode, string selectedId)
         {
             InitializeComponent();
-            switch (tableName)
+            if (tableName == "customers")
             {
-                case "customers":
-                    InitForCustomersOrWorkers();
-                    break;
-                case "workers":
-                    InitForCustomersOrWorkers();
-                    innLabel = new Label();
-                    innTextBox = new TextBox();
-                    innLabel.Location = new System.Drawing.Point(22, 180);
-                    innLabel.Size = new System.Drawing.Size(93, 13);
-                    innLabel.Text = "ИНН";
-                    innTextBox.Location = new System.Drawing.Point(121, 177);
-                    innTextBox.Size = new System.Drawing.Size(139, 20);
-                    Controls.Add(innLabel);
-                    Controls.Add(innTextBox);
-                    break;
-                case "works":
-                    InitForWorks();
-                    break;
-                case "specializations":
-                    InitForSpecOrPaymentOrStatuses();
-                    break;
-                case "order_statuses":
-                    InitForSpecOrPaymentOrStatuses();
-                    break;
-                case "payment_types":
-                    InitForSpecOrPaymentOrStatuses();
-                    break;
-                case "specializations_for_workers":
-                    InitForSpecsForWorkers();
-                    break;
-                case "works_for_specializations":
-                    InitForWorksForSpecs();
-                    break;
-                case "orders":
-                    InitForOrders();
-                    break;
+                InitForCustomersOrWorkers();
+                if (!addMode)
+                {
+                    List<List<string>> value = PG.GetTableWithCondition(tableName, $"id = {selectedId}");
+                    firstNameTextBox.Text = value[1][2];
+                    nameTextBox.Text = value[1][1];
+                    lastNameTextBox.Text = value[1][3];
+                    phoneNumberTextBox.Text = value[1][4];
+                }
+            }
+            else if (tableName == "workers")
+            {
+                InitForCustomersOrWorkers();
+                innLabel = new Label();
+                innTextBox = new TextBox();
+                innLabel.Location = new System.Drawing.Point(22, 180);
+                innLabel.Size = new System.Drawing.Size(93, 13);
+                innLabel.Text = "ИНН";
+                innTextBox.Location = new System.Drawing.Point(121, 177);
+                innTextBox.Size = new System.Drawing.Size(139, 20);
+                Controls.Add(innLabel);
+                Controls.Add(innTextBox);
+                if (!addMode)
+                {
+                    List<List<string>> value = PG.GetTableWithCondition(tableName, $"inn = \'{selectedId}\'");
+                    innTextBox.Text = value[1][0];
+                    innTextBox.Enabled = false;
+                    firstNameTextBox.Text = value[1][2];
+                    nameTextBox.Text = value[1][1];
+                    lastNameTextBox.Text = value[1][3];
+                    phoneNumberTextBox.Text = value[1][4];
+                }
+            }
+            else if (tableName == "works")
+            {
+                InitForWorks();
+                if (!addMode)
+                {
+                    List<List<string>> value = PG.GetTableWithCondition(tableName, $"id = {selectedId}");
+                    nameTextBox.Text = value[1][1];
+                    descriptTextBox.Text = value[1][2];
+                    costTextBox.Text = value[1][3];
+                }
+            }
+            else if (tableName == "specializations")
+            {
+                InitForSpecOrPaymentOrStatuses();
+                if (!addMode)
+                {
+                    List<List<string>> value = PG.GetTableWithCondition(tableName, $"id = {selectedId}");
+                    nameTextBox.Text = value[1][1];
+                }
+            }
+            else if (tableName == "order_statuses")
+            {
+                InitForSpecOrPaymentOrStatuses();
+                if (!addMode)
+                {
+                    List<List<string>> value = PG.GetTableWithCondition(tableName, $"id = {selectedId}");
+                    nameTextBox.Text = value[1][1];
+                }
+            }
+            else if (tableName == "payment_types")
+            {
+                InitForSpecOrPaymentOrStatuses();
+                if (!addMode)
+                {
+                    List<List<string>> value = PG.GetTableWithCondition(tableName, $"id = {selectedId}");
+                    nameTextBox.Text = value[1][1];
+                }
+            }
+            else if (tableName == "specializations_for_workers")
+            {
+                InitForSpecsForWorkers();
+                specializations = new Dictionary<string, string>();
+                List<List<string>> specs = PG.SendQuery("Select id, name FROM specializations");
+                if (!addMode)
+                {
+                    List<List<string>> currentSpec = PG.SendQuery($"SELECT specialization_id FROM specializations_for_workers WHERE inn = \'{selectedId}\';");
+                    for (int i = 1; i < specs.Count; i++)
+                    {
+                        specializations.Add(specs[i][1], specs[i][0]);
+                        specializationComboBox.Items.Add(specs[i][1]);
+                        if (specs[i][0] == currentSpec[1][0]) specializationComboBox.SelectedItem = specializationComboBox.Items[i - 1];
+                    }
+                    List<List<string>> worker = PG.SendQuery($"SELECT first_name, name, last_name FROM workers WHERE inn = \'{selectedId}\';");
+                    workerComboBox.Items.Add($"{worker[1][0]} {worker[1][1][0]}. {worker[1][2][0]}.");
+                    workerComboBox.SelectedItem = workerComboBox.Items[0];
+                    workerComboBox.Enabled = false;
+                }
+                else
+                {
+                    for (int i = 1; i < specs.Count; i++)
+                    {
+                        specializations.Add(specs[i][1], specs[i][0]);
+                        specializationComboBox.Items.Add(specs[i][1]);
+                    }
+                    this.workers = new Dictionary<string, string>();
+                    List<List<string>> workers = PG.SendQuery($"SELECT first_name, name, last_name, inn FROM workers");
+                    for (int i = 1; i < workers.Count; i++)
+                    {
+                        this.workers.Add($"{workers[i][0]} {workers[i][1][0]}. {workers[i][2][0]}.", workers[i][3]);
+                        workerComboBox.Items.Add($"{workers[i][0]} {workers[i][1][0]}. {workers[i][2][0]}.");
+                    }
+                }
+            }
+            else if (tableName == "works_for_specializations")
+            {
+                InitForWorksForSpecs();
+                specializations = new Dictionary<string, string>();
+                List<List<string>> specs = PG.SendQuery("SELECT id, name FROM specializations");
+                if (!addMode)
+                {
+                    List<List<string>> currentSpec = PG.SendQuery($"SELECT specialization_id FROM works_for_specializations WHERE work_id = {selectedId};");
+                    for (int i = 1; i < specs.Count; i++)
+                    {
+                        specializations.Add(specs[i][1], specs[i][0]);
+                        specializationComboBox.Items.Add(specs[i][1]);
+                        if (specs[i][0] == currentSpec[1][0]) specializationComboBox.SelectedItem = specializationComboBox.Items[i - 1];
+                    }
+                    List<List<string>> work = PG.SendQuery($"SELECT name FROM works WHERE id = {selectedId};");
+                    workComboBox.Items.Add(work[1][0]);
+                    workComboBox.SelectedItem = workComboBox.Items[0];
+                    workComboBox.Enabled = false;
+                }
+                else
+                {
+                    for (int i = 1; i < specs.Count; i++)
+                    {
+                        specializations.Add(specs[i][1], specs[i][0]);
+                        specializationComboBox.Items.Add(specs[i][1]);
+                    }
+                    this.works = new Dictionary<string, string>();
+                    List<List<string>> works = PG.SendQuery("SELECT id, name FROM works;");
+                    for (int i = 1; i < works.Count; i++)
+                    {
+                        this.works.Add(works[i][1], works[i][0]);
+                        workComboBox.Items.Add(works[i][1]);
+                    }
+                }
+            }
+            else if (tableName == "orders")
+            {
+                InitForOrders();
+                customers = new Dictionary<string, string>();
+                List<List<string>> customersTable = PG.SendQuery("SELECT first_name, name, last_name, id FROM customers;");
+                workers = new Dictionary<string, string>();
+                works = new Dictionary<string, string>();
+                List<List<string>> worksTable = PG.SendQuery("SELECT name, id FROM works;");
+                paymentTypes = new Dictionary<string, string>();
+                List<List<string>> paymentTypesTable = PG.SendQuery("SELECT name, id FROM payment_types;");
+                orderStatuses = new Dictionary<string, string>();
+                List<List<string>> orderStatusesTable = PG.SendQuery("SELECT name, id FROM order_statuses;");
+                specializations = new Dictionary<string, string>();
+                List<List<string>> specs = PG.SendQuery("SELECT name, id FROM specializations;");
+                if (!addMode)
+                {
+                    List<List<string>> currentCustomer = PG.SendQuery($"SELECT customer_id FROM orders WHERE id = {selectedId}");
+                    for (int i = 1; i < customersTable.Count; i++)
+                    {
+                        customers.Add($"{customersTable[i][0]} {customersTable[i][1][0]}. {customersTable[i][2][0]}.", customersTable[i][3]);
+                        customerComboBox.Items.Add($"{customersTable[i][0]} {customersTable[i][1][0]}. {customersTable[i][2][0]}.");
+                        if (currentCustomer[1][0] == customersTable[i][3]) customerComboBox.SelectedItem = customerComboBox.Items[i - 1];
+                    }
+                    for (int i = 1; i < worksTable.Count; i++)
+                    {
+                        works.Add(worksTable[i][0], worksTable[i][1]);
+                        workComboBox.Items.Add(worksTable[i][0]);
+                    }
+                    for (int i = 1; i < paymentTypesTable.Count; i++)
+                    {
+                        paymentTypes.Add(paymentTypesTable[i][0], paymentTypesTable[i][1]);
+                        paymentComboBox.Items.Add(paymentTypesTable[i][0]);
+                    }
+                    for (int i = 1; i < orderStatusesTable.Count; i++)
+                    {
+                        orderStatuses.Add(orderStatusesTable[i][0], orderStatusesTable[i][1]);
+                        statuseComboBox.Items.Add(orderStatusesTable[i][0]);
+                    }
+                    for (int i = 1; i < specs.Count; i++)
+                    {
+                        specializations.Add(specs[i][1], specs[i][0]);
+                    }
+                }
+                else
+                { 
+                    for (int i = 1; i < customersTable.Count; i++)
+                    {
+                        customers.Add($"{customersTable[i][0]} {customersTable[i][1][0]}. {customersTable[i][2][0]}.", customersTable[i][3]);
+                        customerComboBox.Items.Add($"{customersTable[i][0]} {customersTable[i][1][0]}. {customersTable[i][2][0]}.");
+                    }
+                    for (int i = 1; i < worksTable.Count; i++)
+                    {
+                        works.Add(worksTable[i][0], worksTable[i][1]);
+                        workComboBox.Items.Add(worksTable[i][0]);
+                    }
+                    for (int i = 1; i < paymentTypesTable.Count; i++)
+                    {
+                        paymentTypes.Add(paymentTypesTable[i][0], paymentTypesTable[i][1]);
+                        paymentComboBox.Items.Add(paymentTypesTable[i][0]);
+                    }
+                    for (int i = 1; i < orderStatusesTable.Count; i++)
+                    {
+                        orderStatuses.Add(orderStatusesTable[i][0], orderStatusesTable[i][1]);
+                        statuseComboBox.Items.Add(orderStatusesTable[i][0]);
+                    }
+                    for (int i = 1; i < specs.Count; i++)
+                    {
+                        specializations.Add(specs[i][1], specs[i][0]);
+                    }
+                }
+                workComboBox.SelectedValueChanged += UpdateWorkers;
+            }
+            this.addMode = addMode;
+            this.tableName = tableName;
+            this.selectedId = selectedId;
+        }
+        private void UpdateWorkers(Object sender, EventArgs args)
+        {
+            if (workComboBox.SelectedValue == "")
+            {
+                workerComboBox.Items.Clear();
+            }
+            else
+            {
+                workerComboBox.SelectedItem = null;
+                workerComboBox.Items.Clear();
+                workers.Clear();
+                List<List<string>> workForSpec = PG.SendQuery($"SELECT specialization_id FROM works_for_specializations WHERE work_id = {works[workComboBox.SelectedItem.ToString()]};");
+                string specId = workForSpec[1][0];
+                List<List<string>> specForWorkers = PG.SendQuery($"SELECT inn FROM specializations_for_workers WHERE specialization_id = {specId}");
+                for (int i = 1; i < specForWorkers.Count; i++)
+                {
+                    List<List<string>> workersTable = PG.SendQuery($"SELECT first_name, name, last_name FROM workers WHERE inn = \'{specForWorkers[i][0]}\'");
+                    workers.Add($"{workersTable[1][0]} {workersTable[1][1][0]}. {workersTable[1][2][0]}.", specForWorkers[i][0]);
+                    workerComboBox.Items.Add($"{workersTable[1][0]} {workersTable[1][1][0]}. {workersTable[1][2][0]}.");
+                }
 
             }
         }
-
         private TextBox firstNameTextBox;
         private TextBox nameTextBox;
         private TextBox lastNameTextBox;
@@ -231,15 +440,15 @@ namespace PGUtil
             customerLabel.Location = new System.Drawing.Point(13, 13);
             customerLabel.Size = new System.Drawing.Size(98, 13);
             customerLabel.Text = "Заказчик";
-            workerLabel.Location = new System.Drawing.Point(13, 40);
-            workerLabel.Size = new System.Drawing.Size(98, 13);
-            workerLabel.Text = "Работник";
-            workLabel.Location = new System.Drawing.Point(13, 71);
-            workLabel.Size = new System.Drawing.Size(98, 13);
             workLabel.Text = "Работа";
-            descriptLabel.Location = new System.Drawing.Point(13, 99);
-            descriptLabel.Size = new System.Drawing.Size(98, 13);
+            workLabel.Location = new System.Drawing.Point(13, 40);
+            workLabel.Size = new System.Drawing.Size(98, 13);
             descriptLabel.Text = "Описание";
+            descriptLabel.Location = new System.Drawing.Point(13, 71);
+            descriptLabel.Size = new System.Drawing.Size(98, 13);
+            workerLabel.Text = "Работник";
+            workerLabel.Location = new System.Drawing.Point(13, 99);
+            workerLabel.Size = new System.Drawing.Size(98, 13);
             receiptLabel.Location = new System.Drawing.Point(12, 126);
             receiptLabel.Size = new System.Drawing.Size(98, 13);
             receiptLabel.Text = "Дата получения";
@@ -254,11 +463,11 @@ namespace PGUtil
             paymentLabel.Text = "Тип оплаты";
             customerComboBox.Location = new System.Drawing.Point(137, 10);
             customerComboBox.Size = new System.Drawing.Size(249, 21);
-            workerComboBox.Location = new System.Drawing.Point(137, 37);
+            workerComboBox.Location = new System.Drawing.Point(137, 96);
             workerComboBox.Size = new System.Drawing.Size(249, 21);
-            workComboBox.Location = new System.Drawing.Point(137, 68);
+            workComboBox.Location = new System.Drawing.Point(137, 37);
             workComboBox.Size = new System.Drawing.Size(249, 21);
-            descriptTextBox.Location = new System.Drawing.Point(137, 96);
+            descriptTextBox.Location = new System.Drawing.Point(137, 68);
             descriptTextBox.Size = new System.Drawing.Size(249, 20);
             receiptTextBox.Location = new System.Drawing.Point(137, 123);
             receiptTextBox.Size = new System.Drawing.Size(249, 20);
@@ -286,9 +495,124 @@ namespace PGUtil
             Controls.Add(descriptTextBox);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void okButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                switch (tableName)
+                {
+                    case "customers":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "first_name, name, last_name, phone", $"\'{firstNameTextBox.Text}\', " +
+                                $"\'{nameTextBox.Text}\', \'{lastNameTextBox.Text}\', \'{phoneNumberTextBox.Text}\'");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, selectedId, "id", $"first_name = \'{firstNameTextBox.Text}\', " +
+                                $"name = \'{nameTextBox.Text}\', last_name = \'{lastNameTextBox.Text}\', phone = \'{phoneNumberTextBox.Text}\'");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "workers":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "inn, first_name, name, last_name, phone", $"\'{innTextBox.Text}\', \'{firstNameTextBox.Text}\', " +
+                                $"\'{nameTextBox.Text}\', \'{lastNameTextBox.Text}\', \'{phoneNumberTextBox.Text}\'");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, $"\'{selectedId}\'", "inn", $"first_name = \'{firstNameTextBox.Text}\', " +
+                                $"name = \'{nameTextBox.Text}\', last_name = \'{lastNameTextBox.Text}\', phone = \'{phoneNumberTextBox.Text}\'");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "works":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "name, descript, cost", $"\'{nameTextBox.Text}\', \'{descriptTextBox.Text}\', \'{costTextBox.Text}\'");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\', descript = \'{descriptTextBox.Text}\', cost = \'{costTextBox.Text}\'");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "specializations":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "name", $"\'{nameTextBox.Text}\'");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\'");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "order_statuses":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "name", $"\'{nameTextBox.Text}\'");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\'");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "payment_types":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "name", $"\'{nameTextBox.Text}\'");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\'");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "specializations_for_workers":
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "specialization_id, inn", $"{specializations[specializationComboBox.SelectedItem.ToString()]}, " +
+                                $"{workers[workerComboBox.SelectedItem.ToString()]}");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, $"\'{selectedId}\'", "inn", $"specialization_id = {specializations[specializationComboBox.SelectedItem.ToString()]}");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "works_for_specializations":
+                        if (addMode) {
+                            PG.Insert(tableName, "specialization_id, work_id", $"{specializations[specializationComboBox.SelectedItem.ToString()]}, " +
+                                $"{works[workComboBox.SelectedItem.ToString()]}");
+                        }
+                        else
+                        {
+                            PG.Update(tableName, $"{selectedId}", "work_id", $"specialization_id = {specializations[specializationComboBox.SelectedItem.ToString()]}");
+                        }
+                        this.Close();
+                        this.Dispose();
+                        break;
+                    case "orders":
 
+                        this.Close();
+                        this.Dispose();
+                        break;
+                }
+            }
+            catch (Exception ex)
+                        {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -59,7 +59,11 @@ namespace PGUtil
             try
             {
                 foreach (Object id in ids)
-                    PG.Delete(tableName, id.ToString(), primaryKeyField);
+                {
+                    if (tableName == "workers" || tableName == "specializations_for_workers") 
+                        PG.Delete(tableName, $"\'{id.ToString()}\'", primaryKeyField);
+                    else PG.Delete(tableName, id.ToString(), primaryKeyField);
+                }
             }
             catch (Exception ex)
             {
@@ -80,7 +84,7 @@ namespace PGUtil
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            InputDataForm form = new InputDataForm(tableName);
+            InputDataForm form = new InputDataForm(tableName, true, null);
             form.Show();
         }
 
@@ -97,6 +101,16 @@ namespace PGUtil
                 addButton.Enabled = true;
                 deleteButton.Enabled = true;
                 updateButton.Enabled = true;
+            }
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                InputDataForm form = new InputDataForm(tableName, false, row.Cells[primaryKeyField].Value.ToString());
+                form.Show();
+                break;
             }
         }
     }

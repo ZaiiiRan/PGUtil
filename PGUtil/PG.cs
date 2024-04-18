@@ -32,11 +32,22 @@ namespace PGUtil
         {
             return connection != null && connection.State == ConnectionState.Open;
         }
-
+        public static void Insert (string tableName, string fields, string value)
+        {
+            NpgsqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"INSERT INTO {tableName} ({fields}) VALUES ({value});";
+            cmd.ExecuteNonQuery();
+        }
+        public static void Update(string tableName, string id, string idColumnName, string values)
+        {
+            NpgsqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"UPDATE {tableName} SET {values} WHERE {idColumnName} = {id};";
+            cmd.ExecuteNonQuery();
+        }
         public static void Delete(string tableName, string id, string idColumnName)
         {
             NpgsqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"DELETE FROM {tableName} WHERE {idColumnName} = {id}";
+            cmd.CommandText = $"DELETE FROM {tableName} WHERE {idColumnName} = {id};";
             cmd.ExecuteNonQuery();
         }
 

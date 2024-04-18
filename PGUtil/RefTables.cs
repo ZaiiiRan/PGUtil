@@ -41,7 +41,7 @@ namespace PGUtil
 
         private void workersMenuItem_Click(object sender, EventArgs e)
         {
-            CRUD form = new CRUD("workers", false, "id");
+            CRUD form = new CRUD("workers", false, "inn");
             form.Show();
         }
 
