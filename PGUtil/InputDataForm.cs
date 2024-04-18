@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace PGUtil
 {
+    public delegate void ChangesInTable();
     public partial class InputDataForm : Form
     {
+        public event ChangesInTable changesInTable;
         private bool addMode;
         private string tableName;
         private string selectedId;
@@ -21,6 +23,34 @@ namespace PGUtil
         private Dictionary<string, string> customers;
         private Dictionary<string, string> paymentTypes;
         private Dictionary<string, string> orderStatuses;
+        private TextBox firstNameTextBox;
+        private TextBox nameTextBox;
+        private TextBox lastNameTextBox;
+        private TextBox phoneNumberTextBox;
+        private Label firstNameLabel;
+        private Label nameLabel;
+        private Label lastNameLabel;
+        private Label phoneNumberLabel;
+        private Label innLabel;
+        private TextBox innTextBox;
+        private TextBox descriptTextBox;
+        private TextBox costTextBox;
+        private Label descriptLabel;
+        private Label costLabel;
+        private Label specializationLabel;
+        private Label workerLabel;
+        private ComboBox specializationComboBox;
+        private ComboBox workerComboBox;
+        private Label customerLabel;
+        private Label receiptLabel;
+        private Label completionLabel;
+        private Label statuseLabel;
+        private Label paymentLabel;
+        private ComboBox customerComboBox;
+        private TextBox receiptTextBox;
+        private TextBox completionTextBox;
+        private ComboBox statuseComboBox;
+        private ComboBox paymentComboBox;
         public InputDataForm(string tableName, bool addMode, string selectedId)
         {
             InitializeComponent();
@@ -43,7 +73,7 @@ namespace PGUtil
                 innTextBox = new TextBox();
                 innLabel.Location = new System.Drawing.Point(22, 180);
                 innLabel.Size = new System.Drawing.Size(93, 13);
-                innLabel.Text = "ИНН";
+                innLabel.Text = "ИНН*";
                 innTextBox.Location = new System.Drawing.Point(121, 177);
                 innTextBox.Size = new System.Drawing.Size(139, 20);
                 Controls.Add(innLabel);
@@ -183,32 +213,50 @@ namespace PGUtil
                 List<List<string>> specs = PG.SendQuery("SELECT name, id FROM specializations;");
                 if (!addMode)
                 {
-                    List<List<string>> currentCustomer = PG.SendQuery($"SELECT customer_id FROM orders WHERE id = {selectedId}");
+                    List<List<string>> currentCustomer = PG.SendQuery($"SELECT customer_id FROM orders WHERE id = {selectedId};");
                     for (int i = 1; i < customersTable.Count; i++)
                     {
                         customers.Add($"{customersTable[i][0]} {customersTable[i][1][0]}. {customersTable[i][2][0]}.", customersTable[i][3]);
                         customerComboBox.Items.Add($"{customersTable[i][0]} {customersTable[i][1][0]}. {customersTable[i][2][0]}.");
                         if (currentCustomer[1][0] == customersTable[i][3]) customerComboBox.SelectedItem = customerComboBox.Items[i - 1];
                     }
+                    List<List<string>> currentWork = PG.SendQuery($"SELECT work_id FROM orders WHERE id = {selectedId};");
                     for (int i = 1; i < worksTable.Count; i++)
                     {
                         works.Add(worksTable[i][0], worksTable[i][1]);
                         workComboBox.Items.Add(worksTable[i][0]);
-                    }
-                    for (int i = 1; i < paymentTypesTable.Count; i++)
-                    {
-                        paymentTypes.Add(paymentTypesTable[i][0], paymentTypesTable[i][1]);
-                        paymentComboBox.Items.Add(paymentTypesTable[i][0]);
-                    }
-                    for (int i = 1; i < orderStatusesTable.Count; i++)
-                    {
-                        orderStatuses.Add(orderStatusesTable[i][0], orderStatusesTable[i][1]);
-                        statuseComboBox.Items.Add(orderStatusesTable[i][0]);
+                        if (currentWork[1][0] == worksTable[i][1]) workComboBox.SelectedItem = workComboBox.Items[i - 1];
                     }
                     for (int i = 1; i < specs.Count; i++)
                     {
                         specializations.Add(specs[i][1], specs[i][0]);
                     }
+                    UpdateWorkers(null, null);
+                    List<List<string>> currentPaymentType = PG.SendQuery($"SELECT payment_type_id FROM orders WHERE id = {selectedId};");
+                    for (int i = 1; i < paymentTypesTable.Count; i++)
+                    {
+                        paymentTypes.Add(paymentTypesTable[i][0], paymentTypesTable[i][1]);
+                        paymentComboBox.Items.Add(paymentTypesTable[i][0]);
+                        if (currentPaymentType[1][0] == paymentTypesTable[i][1]) paymentComboBox.SelectedItem = paymentComboBox.Items[i - 1];
+                    }
+                    List<List<string>> currentStatuse = PG.SendQuery($"SELECT statuse_id FROM orders WHERE id = {selectedId};");
+                    for (int i = 1; i < orderStatusesTable.Count; i++)
+                    {
+                        orderStatuses.Add(orderStatusesTable[i][0], orderStatusesTable[i][1]);
+                        statuseComboBox.Items.Add(orderStatusesTable[i][0]);
+                        if (currentStatuse[1][0] == orderStatusesTable[i][1]) statuseComboBox.SelectedItem = statuseComboBox.Items[i - 1];
+                    }
+                    List<List<string>> currentWorker = PG.SendQuery($"SELECT worker_inn FROM orders WHERE id = {selectedId};");
+                    for (int i = 0; i < workerComboBox.Items.Count; i++)
+                    {
+                        if (currentWorker[1][0] == workers[workerComboBox.Items[i].ToString()]) workerComboBox.SelectedItem = workerComboBox.Items[i];
+                    }
+                    List<List<string>> currentDescript = PG.SendQuery($"SELECT descript FROM orders WHERE id = {selectedId};");
+                    descriptTextBox.Text = currentDescript[1][0];
+                    List<List<string>> currentReceiptDate = PG.SendQuery($"SELECT receipt_date FROM orders WHERE id = {selectedId};");
+                    receiptTextBox.Text = currentReceiptDate[1][0];
+                    List<List<string>> currentCompletionDate = PG.SendQuery($"SELECT completion_date FROM orders WHERE id = {selectedId};");
+                    completionTextBox.Text = currentCompletionDate[1][0];
                 }
                 else
                 { 
@@ -256,26 +304,15 @@ namespace PGUtil
                 workers.Clear();
                 List<List<string>> workForSpec = PG.SendQuery($"SELECT specialization_id FROM works_for_specializations WHERE work_id = {works[workComboBox.SelectedItem.ToString()]};");
                 string specId = workForSpec[1][0];
-                List<List<string>> specForWorkers = PG.SendQuery($"SELECT inn FROM specializations_for_workers WHERE specialization_id = {specId}");
+                List<List<string>> specForWorkers = PG.SendQuery($"SELECT inn FROM specializations_for_workers WHERE specialization_id = {specId};");
                 for (int i = 1; i < specForWorkers.Count; i++)
                 {
                     List<List<string>> workersTable = PG.SendQuery($"SELECT first_name, name, last_name FROM workers WHERE inn = \'{specForWorkers[i][0]}\'");
                     workers.Add($"{workersTable[1][0]} {workersTable[1][1][0]}. {workersTable[1][2][0]}.", specForWorkers[i][0]);
                     workerComboBox.Items.Add($"{workersTable[1][0]} {workersTable[1][1][0]}. {workersTable[1][2][0]}.");
                 }
-
             }
         }
-        private TextBox firstNameTextBox;
-        private TextBox nameTextBox;
-        private TextBox lastNameTextBox;
-        private TextBox phoneNumberTextBox;
-        private Label firstNameLabel;
-        private Label nameLabel;
-        private Label lastNameLabel;
-        private Label phoneNumberLabel;
-        private Label innLabel;
-        private TextBox innTextBox;
         private void InitForCustomersOrWorkers()
         {
             firstNameTextBox = new TextBox();
@@ -286,19 +323,19 @@ namespace PGUtil
             lastNameTextBox = new TextBox();
             phoneNumberLabel = new Label();
             phoneNumberTextBox = new TextBox();
-            firstNameLabel.Size = new System.Drawing.Size(56, 13);
-            firstNameLabel.Text = "Фамилия";
+            firstNameLabel.Size = new System.Drawing.Size(60, 13);
+            firstNameLabel.Text = "Фамилия*";
             firstNameTextBox.Location = new System.Drawing.Point(121, 25);
             firstNameTextBox.Size = new System.Drawing.Size(139, 20);
             firstNameLabel.Location = new System.Drawing.Point(22, 28);
             nameLabel.Location = new System.Drawing.Point(22, 63);
-            nameLabel.Size = new System.Drawing.Size(29, 13);
-            nameLabel.Text = "Имя";
+            nameLabel.Size = new System.Drawing.Size(40, 13);
+            nameLabel.Text = "Имя*";
             nameTextBox.Location = new System.Drawing.Point(121, 60);
             nameTextBox.Size = new System.Drawing.Size(139, 20);
             lastNameLabel.Location = new System.Drawing.Point(22, 101);
-            lastNameLabel.Size = new System.Drawing.Size(54, 13);
-            lastNameLabel.Text = "Отчество";
+            lastNameLabel.Size = new System.Drawing.Size(60, 13);
+            lastNameLabel.Text = "Отчество*";
             lastNameTextBox.Location = new System.Drawing.Point(121, 101);
             lastNameTextBox.Size = new System.Drawing.Size(139, 20);
             phoneNumberLabel.Location = new System.Drawing.Point(22, 140);
@@ -315,10 +352,6 @@ namespace PGUtil
             Controls.Add(firstNameLabel);
             Controls.Add(firstNameTextBox);
         }
-        private TextBox descriptTextBox;
-        private TextBox costTextBox;
-        private Label descriptLabel;
-        private Label costLabel;
         private void InitForWorks()
         {
             nameTextBox = new TextBox();
@@ -328,7 +361,7 @@ namespace PGUtil
             descriptLabel = new Label();
             costLabel = new Label();
             nameLabel.Size = new System.Drawing.Size(90, 13);
-            nameLabel.Text = "Название";
+            nameLabel.Text = "Название*";
             nameTextBox.Location = new System.Drawing.Point(121, 25);
             nameTextBox.Size = new System.Drawing.Size(139, 20);
             nameLabel.Location = new System.Drawing.Point(22, 28);
@@ -339,7 +372,7 @@ namespace PGUtil
             descriptTextBox.Size = new System.Drawing.Size(139, 20);
             costLabel.Location = new System.Drawing.Point(22, 101);
             costLabel.Size = new System.Drawing.Size(90, 13);
-            costLabel.Text = "Стоимость";
+            costLabel.Text = "Стоимость*";
             costTextBox.Location = new System.Drawing.Point(121, 101);
             costTextBox.Size = new System.Drawing.Size(139, 20);
             Controls.Add(nameLabel);
@@ -354,17 +387,14 @@ namespace PGUtil
             nameTextBox = new TextBox();
             nameLabel = new Label();
             nameLabel.Size = new System.Drawing.Size(90, 13);
-            nameLabel.Text = "Название";
+            nameLabel.Text = "Название*";
             nameTextBox.Location = new System.Drawing.Point(121, 25);
             nameTextBox.Size = new System.Drawing.Size(139, 20);
             nameLabel.Location = new System.Drawing.Point(22, 28);
             Controls.Add(nameLabel);
             Controls.Add(nameTextBox);
         }
-        private Label specializationLabel;
-        private Label workerLabel;
-        private ComboBox specializationComboBox;
-        private ComboBox workerComboBox;
+        
         private void InitForSpecsForWorkers()
         {
             specializationLabel = new Label();
@@ -372,11 +402,11 @@ namespace PGUtil
             specializationComboBox = new ComboBox();
             workerComboBox = new ComboBox();
             specializationLabel.Location = new System.Drawing.Point(13, 13);
-            specializationLabel.Size = new System.Drawing.Size(86, 13);
-            specializationLabel.Text = "Специализация";
+            specializationLabel.Size = new System.Drawing.Size(90, 13);
+            specializationLabel.Text = "Специализация*";
             workerLabel.Location = new System.Drawing.Point(13, 54);
-            workerLabel.Size = new System.Drawing.Size(55, 13);
-            workerLabel.Text = "Работник";
+            workerLabel.Size = new System.Drawing.Size(60, 13);
+            workerLabel.Text = "Работник*";
             specializationComboBox.Location = new System.Drawing.Point(114, 10);
             specializationComboBox.Size = new System.Drawing.Size(211, 21);
             workerComboBox.Location = new System.Drawing.Point(114, 51);
@@ -396,10 +426,10 @@ namespace PGUtil
             workComboBox = new ComboBox();
             workLabel.Location = new System.Drawing.Point(13, 13);
             workLabel.Size = new System.Drawing.Size(86, 13);
-            workLabel.Text = "Работа";
+            workLabel.Text = "Работа*";
             specializationLabel.Location = new System.Drawing.Point(13, 54);
-            specializationLabel.Size = new System.Drawing.Size(86, 13);
-            specializationLabel.Text = "Специализация";
+            specializationLabel.Size = new System.Drawing.Size(90, 13);
+            specializationLabel.Text = "Специализация*";
             workComboBox.Location = new System.Drawing.Point(114, 10);
             workComboBox.Size = new System.Drawing.Size(211, 21);
             specializationComboBox.Location = new System.Drawing.Point(114, 51);
@@ -409,16 +439,6 @@ namespace PGUtil
             Controls.Add(specializationComboBox);
             Controls.Add(workComboBox);
         }
-        private Label customerLabel;
-        private Label receiptLabel;
-        private Label completionLabel;
-        private Label statuseLabel;
-        private Label paymentLabel;
-        private ComboBox customerComboBox;
-        private TextBox receiptTextBox;
-        private TextBox completionTextBox;
-        private ComboBox statuseComboBox;
-        private ComboBox paymentComboBox;
         private void InitForOrders()
         {
             customerLabel = new Label();
@@ -439,28 +459,28 @@ namespace PGUtil
             descriptTextBox = new TextBox();
             customerLabel.Location = new System.Drawing.Point(13, 13);
             customerLabel.Size = new System.Drawing.Size(98, 13);
-            customerLabel.Text = "Заказчик";
-            workLabel.Text = "Работа";
+            customerLabel.Text = "Заказчик*";
+            workLabel.Text = "Работа*";
             workLabel.Location = new System.Drawing.Point(13, 40);
             workLabel.Size = new System.Drawing.Size(98, 13);
             descriptLabel.Text = "Описание";
             descriptLabel.Location = new System.Drawing.Point(13, 71);
             descriptLabel.Size = new System.Drawing.Size(98, 13);
-            workerLabel.Text = "Работник";
+            workerLabel.Text = "Работник*";
             workerLabel.Location = new System.Drawing.Point(13, 99);
             workerLabel.Size = new System.Drawing.Size(98, 13);
             receiptLabel.Location = new System.Drawing.Point(12, 126);
             receiptLabel.Size = new System.Drawing.Size(98, 13);
-            receiptLabel.Text = "Дата получения";
+            receiptLabel.Text = "Дата получения*";
             completionLabel.Location = new System.Drawing.Point(12, 154);
             completionLabel.Size = new System.Drawing.Size(98, 13);
             completionLabel.Text = "Дата выполнения";
             statuseLabel.Location = new System.Drawing.Point(13, 181);
             statuseLabel.Size = new System.Drawing.Size(98, 13);
-            statuseLabel.Text = "Статус заказа";
+            statuseLabel.Text = "Статус заказа*";
             paymentLabel.Location = new System.Drawing.Point(13, 206);
             paymentLabel.Size = new System.Drawing.Size(98, 13);
-            paymentLabel.Text = "Тип оплаты";
+            paymentLabel.Text = "Тип оплаты*";
             customerComboBox.Location = new System.Drawing.Point(137, 10);
             customerComboBox.Size = new System.Drawing.Size(249, 21);
             workerComboBox.Location = new System.Drawing.Point(137, 96);
@@ -502,34 +522,41 @@ namespace PGUtil
                 switch (tableName)
                 {
                     case "customers":
+                        if (firstNameTextBox.Text == "" || nameTextBox.Text == "" || lastNameTextBox.Text == "") 
+                            throw new ApplicationException("Заполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "first_name, name, last_name, phone", $"\'{firstNameTextBox.Text}\', " +
-                                $"\'{nameTextBox.Text}\', \'{lastNameTextBox.Text}\', \'{phoneNumberTextBox.Text}\'");
+                                $"\'{nameTextBox.Text}\', \'{lastNameTextBox.Text}\', {(phoneNumberTextBox.Text == "" ? "NULL" : $"\'{phoneNumberTextBox.Text}\'")}");
                         }
                         else
                         {
                             PG.Update(tableName, selectedId, "id", $"first_name = \'{firstNameTextBox.Text}\', " +
-                                $"name = \'{nameTextBox.Text}\', last_name = \'{lastNameTextBox.Text}\', phone = \'{phoneNumberTextBox.Text}\'");
+                                $"name = \'{nameTextBox.Text}\', last_name = \'{lastNameTextBox.Text}\', phone = {(phoneNumberTextBox.Text == "" ? "NULL" : $"\'{phoneNumberTextBox.Text}\'")}");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "workers":
+                        if (firstNameTextBox.Text == "" || nameTextBox.Text == "" || lastNameTextBox.Text == "" || innTextBox.Text == "")
+                            throw new ApplicationException("Заполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "inn, first_name, name, last_name, phone", $"\'{innTextBox.Text}\', \'{firstNameTextBox.Text}\', " +
-                                $"\'{nameTextBox.Text}\', \'{lastNameTextBox.Text}\', \'{phoneNumberTextBox.Text}\'");
+                                $"\'{nameTextBox.Text}\', \'{lastNameTextBox.Text}\', {(phoneNumberTextBox.Text == "" ? "NULL" : $"\'{phoneNumberTextBox.Text}\'")}");
                         }
                         else
                         {
                             PG.Update(tableName, $"\'{selectedId}\'", "inn", $"first_name = \'{firstNameTextBox.Text}\', " +
-                                $"name = \'{nameTextBox.Text}\', last_name = \'{lastNameTextBox.Text}\', phone = \'{phoneNumberTextBox.Text}\'");
+                                $"name = \'{nameTextBox.Text}\', last_name = \'{lastNameTextBox.Text}\', phone = {(phoneNumberTextBox.Text == "" ? "NULL" : $"\'{phoneNumberTextBox.Text}\'")}");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "works":
+                        if (nameTextBox.Text == "" || costTextBox.Text == "") throw new ApplicationException("Заполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "name, descript, cost", $"\'{nameTextBox.Text}\', \'{descriptTextBox.Text}\', \'{costTextBox.Text}\'");
@@ -538,10 +565,12 @@ namespace PGUtil
                         {
                             PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\', descript = \'{descriptTextBox.Text}\', cost = \'{costTextBox.Text}\'");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "specializations":
+                        if (nameTextBox.Text == "") throw new ApplicationException("Заполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "name", $"\'{nameTextBox.Text}\'");
@@ -550,10 +579,12 @@ namespace PGUtil
                         {
                             PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\'");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "order_statuses":
+                        if (nameTextBox.Text == "") throw new ApplicationException("Заполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "name", $"\'{nameTextBox.Text}\'");
@@ -562,10 +593,12 @@ namespace PGUtil
                         {
                             PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\'");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "payment_types":
+                        if (nameTextBox.Text == "") throw new ApplicationException("Заполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "name", $"\'{nameTextBox.Text}\'");
@@ -574,10 +607,13 @@ namespace PGUtil
                         {
                             PG.Update(tableName, selectedId, "id", $"name = \'{nameTextBox.Text}\'");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "specializations_for_workers":
+                        if (specializationComboBox.SelectedItem.ToString() == "" || workerComboBox.SelectedItem.ToString() == "")
+                            throw new ApplicationException("Зполните обязательные поля!");
                         if (addMode)
                         {
                             PG.Insert(tableName, "specialization_id, inn", $"{specializations[specializationComboBox.SelectedItem.ToString()]}, " +
@@ -587,23 +623,44 @@ namespace PGUtil
                         {
                             PG.Update(tableName, $"\'{selectedId}\'", "inn", $"specialization_id = {specializations[specializationComboBox.SelectedItem.ToString()]}");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "works_for_specializations":
+                        if (specializationComboBox.SelectedItem.ToString() == "" || workComboBox.SelectedItem.ToString() == "")
+                            throw new ApplicationException("Зполните обязательные поля!");
                         if (addMode) {
                             PG.Insert(tableName, "specialization_id, work_id", $"{specializations[specializationComboBox.SelectedItem.ToString()]}, " +
                                 $"{works[workComboBox.SelectedItem.ToString()]}");
                         }
                         else
                         {
-                            PG.Update(tableName, $"{selectedId}", "work_id", $"specialization_id = {specializations[specializationComboBox.SelectedItem.ToString()]}");
+                            PG.Update(tableName, selectedId, "work_id", $"specialization_id = {specializations[specializationComboBox.SelectedItem.ToString()]}");
                         }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;
                     case "orders":
+                        if (customerComboBox.SelectedItem.ToString() == "" || workComboBox.SelectedItem.ToString() == ""
+                            || workComboBox.SelectedItem.ToString() == "" || receiptTextBox.Text == "" || statuseComboBox.SelectedItem.ToString() == ""
+                            || paymentComboBox.SelectedItem.ToString() == "") throw new ApplicationException("Заполните обязательные поля!");
+                        if (addMode)
+                        {
+                            PG.Insert(tableName, "customer_id, worker_inn, work_id, descript, receipt_date, completion_date, statuse_id, payment_type_id",
+                                $"{customers[customerComboBox.SelectedItem.ToString()]}, \'{workers[workerComboBox.SelectedItem.ToString()]}\', " +
+                                $"{works[workComboBox.SelectedItem.ToString()]}, \'{descriptTextBox.Text}\', \'{receiptTextBox.Text}\', {(completionTextBox.Text == "" ? "NULL" : $"\'{completionTextBox.Text}\'")}, " +
+                                $"{orderStatuses[statuseComboBox.SelectedItem.ToString()]}, {paymentTypes[paymentComboBox.SelectedItem.ToString()]}");
 
+                        }
+                        else
+                        {
+                            PG.Update(tableName, selectedId, "id", $"customer_id = {customers[customerComboBox.SelectedItem.ToString()]}, worker_inn = \'{workers[workerComboBox.SelectedItem.ToString()]}\', " +
+                                $"work_id = {works[workComboBox.SelectedItem.ToString()]}, descript = \'{descriptTextBox.Text}\', receipt_date = \'{receiptTextBox.Text}\', " +
+                                $"completion_date = {(completionTextBox.Text == "" ? "NULL" : $"\'{completionTextBox.Text}\'")}, statuse_id = {orderStatuses[statuseComboBox.SelectedItem.ToString()]}, payment_type_id = {paymentTypes[paymentComboBox.SelectedItem.ToString()]}");
+                        }
+                        changesInTable.Invoke();
                         this.Close();
                         this.Dispose();
                         break;

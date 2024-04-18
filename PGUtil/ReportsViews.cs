@@ -40,19 +40,19 @@ namespace PGUtil
 
         private void periodMenuItem_Click(object sender, EventArgs e)
         {
-            PeriodReportForm form = new PeriodReportForm();
+            CRUD form = new CRUD("period_reports", true, null);
             form.Show();
         }
 
         private void orderMenuItem_Click(object sender, EventArgs e)
         {
-            OrderReportsForm form = new OrderReportsForm();
+            CRUD form = new CRUD("order_reports", true, null);
             form.Show();
         }
 
         private void orderReceiptMenuItem_Click(object sender, EventArgs e)
         {
-            OrderReceiptsForm form = new OrderReceiptsForm();
+            CRUD form = new CRUD("order_receipt", true, null);
             form.Show();
         }
     }

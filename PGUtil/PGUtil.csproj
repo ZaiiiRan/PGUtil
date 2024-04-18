@@ -113,6 +113,12 @@
     <Compile Include="DataTables.Designer.cs">
       <DependentUpon>DataTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerateReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateReportsForm.Designer.cs">
+      <DependentUpon>GenerateReportsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,12 +164,6 @@
     <Compile Include="ReportsViews.Designer.cs">
       <DependentUpon>ReportsViews.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableForm.cs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TableForm.cs.Designer.cs">
-      <DependentUpon>TableForm.cs.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateReportsForm.resx">
+      <DependentUpon>GenerateReportsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputDataForm.resx">
       <DependentUpon>InputDataForm.cs</DependentUpon>
@@ -203,9 +206,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportsViews.resx">
       <DependentUpon>ReportsViews.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TableForm.cs.resx">
-      <DependentUpon>TableForm.cs.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

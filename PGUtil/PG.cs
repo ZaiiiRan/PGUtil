@@ -62,6 +62,34 @@ namespace PGUtil
             string query = "SELECT * FROM " + tableName + " WHERE " + condition + ";";
             return SendQuery(query);
         }
+        public static List<List<string>> GetTableForPage(string tableName, int page, int recordsPerPage)
+        {
+            int offset = (page - 1) * recordsPerPage;
+            string query = $"SELECT * FROM {tableName} LIMIT {recordsPerPage} OFFSET {offset};";
+            return SendQuery(query);
+        }
+        public static List<List<string>> GetTableWithConditionForPage(string tableName, string condition, int page, int recordsPerPage)
+        {
+            int offset = (page - 1) * recordsPerPage;
+            string query = $"SELECT * FROM {tableName} WHERE {condition} LIMIT {recordsPerPage} OFFSET {offset};";
+            return SendQuery(query);
+        }
+        public static int GetTotalRecordsCount(string tableName)
+        {
+            string query = $"SELECT COUNT(*) FROM {tableName};";
+            NpgsqlCommand command = connection.CreateCommand();
+            command.CommandText = query;
+            int totalRecords = Convert.ToInt32(command.ExecuteScalar());
+            return totalRecords;
+        }
+        public static int GetTotalRecordsWithConditionCount(string tableName, string condition)
+        {
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE {condition};";
+            NpgsqlCommand command = connection.CreateCommand();
+            command.CommandText = query;
+            int totalRecords = Convert.ToInt32(command.ExecuteScalar());
+            return totalRecords;
+        }
 
         public static List<List<string>> SendQuery(string sql)
         {
