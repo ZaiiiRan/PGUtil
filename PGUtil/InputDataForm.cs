@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -666,8 +667,12 @@ namespace PGUtil
                         break;
                 }
             }
+            catch (PostgresException ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+            }
             catch (Exception ex)
-                        {
+            {
                 MessageBox.Show(ex.Message);
             }
         }

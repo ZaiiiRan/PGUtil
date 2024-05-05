@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -101,6 +102,9 @@ namespace PGUtil
                         PG.Delete(tableName, $"\'{id.ToString()}\'", primaryKeyField);
                     else PG.Delete(tableName, id.ToString(), primaryKeyField);
                 }
+            }
+            catch (PostgresException ex) {
+                MessageBox.Show("Ошибка: " + ex.Message);
             }
             catch (Exception ex)
             {
